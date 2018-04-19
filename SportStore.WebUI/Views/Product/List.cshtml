@@ -1,0 +1,24 @@
+﻿@using SportStore.Domain.Entities
+@using SportStore.WebUI.HtmlHelpers
+@model SportStore.WebUI.Models.PruductsListViewModel
+
+@{
+    ViewBag.Title = "Products";
+}
+
+@foreach (var item in Model.Products)
+{
+    @Html.Partial("ProductSummary",item)
+    @*<div class="well">
+        <h3>
+        <strong>@item.Name</strong>
+            <span class="pull-right label label-primary " >@item.Price.ToString("c")</span>
+        </h3>
+        <span class="lead">@item.Description</span>
+    </div>*@
+}
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PageingInfo, x => Url.Action("List", new { page = x , category = Model.CurrentCategory }))
+</div>
+
+
