@@ -3,24 +3,40 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/ErrotStyle.css" rel="stylesheet" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <style>
+        .navbar-right{
+            float:right !important;
+            margin-right:15px;margin-left:15px;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse"  role="navigation" > 
-       <a class="navbar-brand" href="#">Sports Store</a>
+       <a class="navbar-brand" href="#">
+        <span class="hidden-xs ">Sports Store</span>
+           <div class="visible-xs">Sports</div>
+           <div class="visible-xs">Store</div>
+       </a>
+        @Html.Action("Summary", "Cart")
      </div>
+    <div class="visible-xs">
+        @Html.Action("Menu", "Nav", new { horizontotalLayout = true })
+    </div>
     <div class="row panel">
-        <div id="CateGories" class="col-xs-3">
+
+        <div id="CateGories" class="col-sm-3 hidden-xs" >
             @Html.Action("Menu","Nav")
         </div>
-        <div class="col-xs-8">
+        <div class="col-sm-8 col-xs-12">
             @RenderBody()
         </div>
-    @*</div>
-        <div class="container">
+    </div>
+        @*<div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>

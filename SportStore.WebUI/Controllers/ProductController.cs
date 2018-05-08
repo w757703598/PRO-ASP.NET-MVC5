@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SportStore.WebUI.Models;
+using SportStore.Domain.Entities;
 
 namespace SportStore.WebUI.Controllers
 {
@@ -32,17 +33,29 @@ namespace SportStore.WebUI.Controllers
             //return View(repository.Products.OrderBy(p=>p.ProductID).Skip((page-1)*pageSize).Take(pageSize));
             PruductsListViewModel model = new PruductsListViewModel()
             {
-                Products = repository.Products.Where(p=>category==null||p.Category==category).OrderBy(p => p.ProductID).Skip((page - 1) * pageSize).Take(pageSize),
+                Products = repository.Products.Where(p => category == null || p.Category == category).OrderBy(p => p.ProductID).Skip((page - 1) * pageSize).Take(pageSize),
                 PageingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
-                    TotalItems = repository.Products.Count()
+                    TotalItems = category == null ? repository.Products.Count() : repository.Products.Where(e => e.Category == category).Count()
                 },
                 CurrentCategory=category
 
             };
             return View(model);
+        }
+        public FileContentResult GetImage(int productId )
+        {
+            Product prod = repository.Products.FirstOrDefault(p => p.ProductID == productId);
+            if (prod != null)
+            {
+                return File(prod.ImageData, prod.ImageMineType);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

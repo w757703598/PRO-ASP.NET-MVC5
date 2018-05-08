@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SportStore.Domain.Entities;
+using SportStore.WebUI.Infrastructure.Binders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +15,10 @@ namespace SportStore.WebUI
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            //使用CartModelBinder类创建Cart实例
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
+      
         }
     }
 }

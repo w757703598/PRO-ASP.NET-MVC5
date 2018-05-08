@@ -107,5 +107,27 @@ namespace SportStore.UnitTests
             Assert.AreEqual(result[1], "Plums");
             Assert.AreEqual(result[2], "Yellow");
         }
+        [TestMethod]
+        public void Indicates_Selected_Category()
+        {
+            //准备-创建模拟存储库
+            Mock<IProductsRepository> mock = new Mock<IProductsRepository>();
+            mock.Setup(p => p.Products).Returns(new Product[]
+            {
+                new Product {ProductID=1,Name="p1" ,Category="Apples"},
+                new Product {ProductID=2,Name="p2",Category="Plums" },
+                new Product {ProductID=3,Name="p3",Category="Apples" },
+                new Product {ProductID=4,Name="p4",Category="Yellow" },
+                new Product {ProductID=5,Name="p5",Category="Apples" },
+            });
+            //准备创建控制器
+            NavController controller = new NavController(mock.Object);
+            //准备-定义已选分类
+            string category = "Apples";
+            //动作
+            string result = controller.Menu(category).ViewBag.SelectedCategory;
+            //断言
+            Assert.AreEqual(category, result);
+        }
     }
 }

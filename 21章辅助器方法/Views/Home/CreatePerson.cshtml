@@ -1,0 +1,36 @@
+﻿@model _21章辅助器方法.Models.Person
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    Html.EnableClientValidation(false);
+}
+<!DOCTYPE html>
+<h2>CreatePerson:@Html.LabelForModel()</h2>
+
+<form action="~/Home/CreatePerson" method="post">
+    <div class="column">
+        @Html.EditorForModel()
+    </div>
+
+    <div class="column">
+        @Html.EditorFor(m=>m.HomeAddress)
+    </div>
+    @*<div class="dataElem">
+        <label>PersonId</label>
+        @Html.Editor("PersonId")
+        <input name="personId" value="@Model.PersonID" />       
+    </div>
+    <div class="dataElem">
+        <label>First Name</label>
+        <input name="FirstName" value="@Model.FirstName" />
+    </div>
+    <div class="dataElem">
+        <label>Last Name</label>
+        <input name="LastName" value="@Model.LastName" />
+    </div>
+    <div class="dataElem">
+        <label>Birth Date</label>
+        @Html.EditorFor(u=>u.BirthDate)
+    </div>
+    @Html.DropDownListFor(m=>m.Role,new SelectList(Enum.GetNames(typeof(_21章辅助器方法.Models.Role))))*@
+    <input type="submit" value="Submit"/>
+</form>

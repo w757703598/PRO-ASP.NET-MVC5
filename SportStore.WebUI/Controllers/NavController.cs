@@ -20,10 +20,13 @@ namespace SportStore.WebUI.Controllers
         {
             return View();
         }
-        public PartialViewResult Menu()
+        public PartialViewResult Menu(string category=null/*,bool horizontotalLayout=false*/)
         {
+            ViewBag.SelectedCategory = category;
             IEnumerable<string> categories = repository.Products.Select(x => x.Category).Distinct().OrderBy(x => x);
-            return PartialView(categories);
+            //string viewName = horizontotalLayout ? "MenuHorizontal" : "Menu";
+            //return PartialView(viewName,categories);
+            return PartialView("FlexMenu", categories);
         }
     }
 }

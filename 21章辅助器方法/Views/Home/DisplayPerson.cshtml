@@ -1,0 +1,27 @@
+﻿@model _21章辅助器方法.Models.Person
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "DisplayPerson";
+}
+
+<h2>DisplayPerson</h2>
+<div class="dataElem">
+    @Html.Label("PersonId")
+    @Html.Display("PersonId")
+</div>
+<div class="dataElem">
+    @Html.Label("FirstName")
+    @Html.Display("FirstName")
+</div>
+<div class="dataElem">
+    @Html.LabelFor(u=>u.LastName)
+    @Html.DisplayFor(u => u.LastName)
+</div>
+<div class="dataElem">
+    @Html.LabelFor(u => u.BirthDate)
+    @Html.DisplayFor(u => u.BirthDate)
+</div>
+<div class="dataElem">
+    @Html.LabelFor(u => u.Role)
+    @Html.DisplayFor(u => u.Role)
+</div>
